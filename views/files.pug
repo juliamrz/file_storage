@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .container
+    if files && files.length
+      ul.file-list
+        each file in files
+          li.file-item
+            p
+              strong Name:
+              |  #{file.originalName}
+
+            // Download link (adjust if needed!)
+            a.download-link(href=`/download/${file._id}`, download)
+              | Download
+
+            // Additional info (optional)
+            p.size
+              small Size: #{(file.size / 1024).toFixed(2)} KB
+            p.date
+              small Uploaded at: #{file.uploadedAt.toLocaleString()}
+
+    else
+      p No uploaded files were found.

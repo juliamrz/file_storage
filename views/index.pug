@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  .container
+    if error
+      .alert.error
+        p= error
+    
+    if message
+      .alert.success
+        p= message
+        if fileInfo
+          .file-info
+            p <strong>File name:</strong> #{fileInfo.name}
+            p <strong>Size:</strong> #{fileInfo.size}
+    
+    .upload-form
+      h2 Upload File
+      form(action="/upload", method="POST", enctype="multipart/form-data")
+        .form-group
+          label(for="file") Select .txt file (max 100KB):
+          input(type="file", id="file", name="file", accept=".txt", required)
+        
+        .form-group
+          button(type="submit") Upload File
+      
+      .info
+        h3 Requirements:
+        ul
+          li Only files with .txt extension
+          li Maximum size: 100 KB
